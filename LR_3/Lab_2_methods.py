@@ -2,7 +2,7 @@ import sqlite3
 from sqlite3 import Error
 import pandas as pd
 
-# A
+# Создание БД
 def create_connection(db_file):
     conn = None
     try:
@@ -39,7 +39,7 @@ def select_from_table(database_name, table_name):
     query = f"SELECT * FROM {table_name}"
     cursor.execute(query)
     rows = cursor.fetchall()
-    res = dict((y[0], y[1:]) for y in rows)
+    res = dict((y[0], y[1:]) for y in rows) #вывод в виде id: values
     return res
     conn.close()
 

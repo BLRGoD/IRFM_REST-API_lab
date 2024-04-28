@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse
 import pandas as pd
 import sqlite3
 from Lab_2_methods import select_from_table, delete_from_table
@@ -15,12 +15,18 @@ class Single_line_op(Resource):
     def delete(self, table_name, line_id):
         delete_from_table('house_data.db',table_name, line_id)
 
+    def post(self, table_name, line_id):
+        parser = reqparse.RequestParser()
+        parser.add_argument("")
+        parser.add_argument("id")
+        parser.add_argument("id")
+        parser.add_argument("id")
 
 class Get_table(Resource):
     def get(self, table_name):
         return select_from_table('house_data.db',table_name) 
 
-api.add_resource(Get_table, "/api/main/<string:table_name>/", endpoint="get_table")
+api.add_resource(Get_table, "<string:table_name>/", endpoint="get_table")
 api.add_resource(Single_line_op, "/api/main/<string:table_name>/<int:line_id>/", endpoint="single_line_op")
 
 
