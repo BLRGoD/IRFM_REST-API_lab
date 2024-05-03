@@ -43,6 +43,14 @@ def select_from_table(database_name, table_name):
     return res
     conn.close()
 
+
+#INSERT записи в таблицу
+def insert_into_table(database_name, table_name, line_df):
+    conn = sqlite3.connect(database_name)
+    line_df.to_sql(table_name, conn, if_exists='append', index=False)
+    conn.close()
+  
+
 #Удаление записи из таблицы
 def delete_from_table(database_name, table_name, line_id):
     conn = sqlite3.connect(database_name)
@@ -50,6 +58,20 @@ def delete_from_table(database_name, table_name, line_id):
     cursor.execute(f'DELETE FROM {table_name} WHERE id = {line_id}')
     conn.commit()
     conn.close()
+
+#Задание F
+def houses_sold_sum(year,month):
+  dct_month = {1 : "01", 2 : "02", 3 : "03", 4 : "04", 5 : "05", 6 : "06", 7 : "07", 8 : "08", 9 : "09", 10 : "10", 11 : "11", 12 : "12"}
+  df = pd.DataFrame(select_from_table("house_data.db","kc_house_data")).T
+  # df.insert(loc=0, column="id", value=df.index)
+  # df.index = range(1, len(df.index) + 1)
+  new_column_names = {0: 'date', 1: 'price', 2: 'yr_built', 3: 'yr_renovated', 4: 'sqft_living', 5: 'condition', 6: 'real_year'}
+  df = df.rename(columns=new_column_names)
+  df['year'] = df['date'].str.slice(0, 4)
+  df['month'] = df['date'].str.slice(4, 6)
+  filt_df = df[(df['year'] == str(year)) & (df['month'] == dct_month[month])]
+  filt_df
+  print(filt_df["price"].sum())
 
 
 create_connection('house_data.db')
