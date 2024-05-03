@@ -34,12 +34,12 @@ class Table_op(Resource):
         parser.add_argument("sqft_living",type=int)
         parser.add_argument("condition",type=int)
         parser.add_argument("real_year",type=int)
-
         args = parser.parse_args()
         args_dict = vars(args)
-        new_line = pd.DataFrame(args_dict,index=[0])
-        
-        insert_into_table('house_data.db', table_name, new_line)
+        return args_dict
+        # new_line = pd.DataFrame(args_dict,index=[0])
+        # return new_line.to_json(orient="split")
+        # insert_into_table('house_data.db', table_name, new_line)
 
 
 api.add_resource(Table_op, "/api/main/<string:table_name>/", endpoint="get_table")

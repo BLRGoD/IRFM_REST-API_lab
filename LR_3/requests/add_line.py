@@ -1,7 +1,7 @@
 import requests
 import json
 
-new_id = 1111111111
+new_id = 111111111
 BASE = f'http://localhost:3000/api/main/kc_house_data/'
 
 data = {
@@ -16,7 +16,7 @@ data = {
 }
 
 headers = {'Content-Type': 'application/json'}
-response = requests.post(BASE, data=json.dumps(data), headers=headers)
+response = requests.post(BASE, json=data, headers=headers)
 # print(response.json())
 if response.status_code == 200:
     print(response.json())
