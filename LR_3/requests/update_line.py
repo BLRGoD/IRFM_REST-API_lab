@@ -1,18 +1,13 @@
 import requests
 import json
 
-new_id = 111111111
+update_id = 111111111
+update_column = "price"
 BASE = f'http://localhost:3000/api/main/kc_house_data/'
 
 data = {
-    "id": new_id,
-    "date": "20141013T000000",
-    "price": 221900,
-    "yr_built": 1960,
-    "yr_renovated": 0,
-    "sqft_living": 1180,
-    "condition": 3,
-    "real_year": 2027
+    "id": update_id,
+    update_column: "2223333"
 }
 
 headers = {'Content-Type': 'application/json'}
